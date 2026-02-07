@@ -13,6 +13,16 @@ $success = "";
 
 /* ดึงสถานที่ */
 $places = $pdo->query("SELECT id, place_name FROM places ORDER BY place_name ASC")->fetchAll(PDO::FETCH_ASSOC);
+/* ดึงสถานะการจองของผู้ใช้ */
+$myBookings = $pdo->prepare("
+    SELECT b.*, p.place_name
+    FROM bookings b
+    JOIN places p ON b.place_id = p.id
+    WHERE b.user_id = ?
+    ORDER BY b.booking_date DESC, b.start_time DESC
+");
+$myBookings->execute([$user_id]);
+$myBookings = $myBookings->fetchAll(PDO::FETCH_ASSOC);
 
 /* เมื่อกดจอง */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

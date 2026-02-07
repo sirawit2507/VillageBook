@@ -1,0 +1,140 @@
+/* ===== Base ===== */
+body{
+  font-family: 'Kanit', sans-serif;
+  background:#f6f7fb;
+  margin:0;
+  padding:20px;
+}
+
+/* ===== Status Box ===== */
+.status-box{
+  max-width:1000px;
+  margin:40px auto;
+  background:#ffffff;
+  border-radius:18px;
+  padding:25px 30px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.status-box h3{
+  margin:0 0 20px;
+  font-size:22px;
+  color:#1f2937;
+}
+
+/* ===== Table ===== */
+.status-table{
+  width:100%;
+  border-collapse:collapse;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.status-table thead{
+  background:#f1f5f9;
+}
+
+.status-table th{
+  padding:14px 12px;
+  font-weight:500;
+  color:#374151;
+  font-size:15px;
+  text-align:center;
+}
+
+.status-table td{
+  padding:14px 12px;
+  font-size:14px;
+  color:#111827;
+  text-align:center;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.status-table tbody tr:hover{
+  background:#f8fafc;
+}
+
+/* ===== Status Badge ===== */
+.status{
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:500;
+  display:inline-block;
+}
+
+/* รออนุมัติ */
+.status.pending{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+/* อนุมัติแล้ว */
+.status.approved{
+  background:#dcfce7;
+  color:#166534;
+}
+
+/* ไม่อนุมัติ */
+.status.rejected{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+/* ===== Empty Text ===== */
+.empty{
+  text-align:center;
+  color:#6b7280;
+  font-size:15px;
+  padding:20px 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width:768px){
+  .status-box{
+    padding:20px;
+  }
+
+  .status-table th,
+  .status-table td{
+    font-size:13px;
+    padding:10px 6px;
+  }
+}
+/* ==============================
+   Back Button
+============================== */
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:20px;
+  padding:10px 18px;
+  background:linear-gradient(135deg,#6366f1,#4f46e5);
+  color:#ffffff;
+  font-size:14px;
+  font-weight:500;
+  border-radius:999px;
+  text-decoration:none;
+  box-shadow:0 10px 20px rgba(79,70,229,.3);
+  transition:.25s ease;
+}
+
+.back-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 25px rgba(79,70,229,.4);
+  background:linear-gradient(135deg,#4f46e5,#4338ca);
+}
+
+.back-btn:active{
+  transform:scale(.97);
+}
+
+/* มือถือ */
+@media(max-width:768px){
+  .back-btn{
+    font-size:13px;
+    padding:8px 14px;
+  }
+}
