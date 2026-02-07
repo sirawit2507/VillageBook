@@ -5,8 +5,8 @@ session_start();
 $sql = "SELECT 
             b.id,
             u.username AS user_name,
-            p.place_name,
-            b.booking_date,
+            p.place_naoking_dateme,
+            b.bo,
             b.start_time,
             b.end_time,
             b.status
