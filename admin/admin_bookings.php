@@ -2,23 +2,26 @@
 require '../db.php';
 session_start();
 
-$sql = "SELECT 
-            b.id,
-            u.username AS user_name,
-            p.place_naoking_dateme,
-            b.bo,
-            b.start_time,
-            b.end_time,
-            b.status
-        FROM bookings b
-        JOIN users u ON b.user_id = u.id
-        JOIN places p ON b.place_id = p.id
-        ORDER BY b.booking_date DESC";
+$sql = "
+    SELECT 
+        b.id,
+        u.username AS user_name,
+        p.place_name,
+        b.booking_date,
+        b.start_time,
+        b.end_time,
+        b.status
+    FROM bookings b
+    JOIN users u ON b.user_id = u.id
+    JOIN places p ON b.place_id = p.id
+    ORDER BY b.booking_date DESC, b.start_time DESC
+";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="th">

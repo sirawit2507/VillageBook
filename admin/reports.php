@@ -45,7 +45,7 @@ th{background:#f3f4f6;}
 
 <div class="box">
     <h2>📊 รายงานการจอง (Admin)</h2>
-
+<a href="dashboard.php">⬅ กลับหน้าแอดมิน</a>
     <div class="cards">
         <div class="card">
             <h3>จำนวนการจองทั้งหมด</h3>
