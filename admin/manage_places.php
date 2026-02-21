@@ -43,6 +43,11 @@ try {
 
 <a href="add_place.php" class="btn-add">+ เพิ่มสถานที่</a>
 
+
+<a href="dashboard.php">⬅ กลับหน้าแอดมิน</a>
+    <div class="cards">
+        <div class="card">
+
 <table>
     <thead>
         <tr>

@@ -26,21 +26,7 @@ $bookings = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 <head>
 <meta charset="UTF-8">
 <title>รายงานการจอง</title>
-<style>
-body{font-family:Arial;background:#f4f6f8;margin:0;padding:20px;}
-.box{max-width:1100px;margin:auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1);}
-.cards{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:20px;}
-.card{flex:1;min-width:220px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:15px;}
-.card h3{margin:0;font-size:16px;color:#333;}
-.card p{margin:10px 0 0;font-size:28px;font-weight:bold;}
-table{width:100%;border-collapse:collapse;margin-top:10px;}
-th,td{border-bottom:1px solid #ddd;padding:10px;text-align:left;}
-th{background:#f3f4f6;}
-.badge{padding:4px 10px;border-radius:999px;font-size:12px;color:#fff;display:inline-block;}
-.pending{background:#f59e0b;}
-.approved{background:#22c55e;}
-.rejected{background:#ef4444;}
-</style>
+<link rel="stylesheet" href="report.css">
 </head>
 <body>
 

@@ -43,17 +43,7 @@ $users = $pdo->query("SELECT id, username, role FROM users ORDER BY id DESC")->f
 <head>
 <meta charset="UTF-8">
 <title>จัดการผู้ใช้งาน</title>
-<style>
-body{font-family:Arial;background:#f4f6f8;margin:0;padding:20px;}
-.box{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.1);}
-table{width:100%;border-collapse:collapse;margin-top:15px;}
-th,td{border-bottom:1px solid #ddd;padding:10px;text-align:left;}
-select,button{padding:6px 10px;}
-.btn-del{background:#dc2626;color:#fff;border:none;border-radius:6px;cursor:pointer;}
-.btn-del:hover{background:#b91c1c;}
-.msg-success{color:green;font-weight:bold;}
-.msg-error{color:red;font-weight:bold;}
-</style>
+<link rel="stylesheet" href="manage_users.css">
 </head>
 <body>
 
@@ -67,7 +57,9 @@ select,button{padding:6px 10px;}
     <?php if ($error): ?>
         <p class="msg-error"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
-
+<a href="dashboard.php">⬅ กลับหน้าแอดมิน</a>
+    <div class="cards">
+        <div class="card">
     <table>
         <tr>
             <th>ID</th>
@@ -111,7 +103,7 @@ select,button{padding:6px 10px;}
     </table>
 
     <br>
-    <a href="dashboard.php">⬅ กลับหน้าแอดมิน</a>
+ 
 </div>
 
 </body>

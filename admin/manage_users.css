@@ -15,7 +15,7 @@ body{
 }
 
 /* กล่องหลัก */
-.container{
+.box{
     max-width:1100px;
     margin:auto;
 }
@@ -25,29 +25,12 @@ h2{
     margin-bottom:20px;
 }
 
-/* ปุ่มเพิ่มสถานที่ */
-.btn-add{
-    display:inline-block;
-    padding:8px 20px;
-    border-radius:25px;
-    background:#facc15;
-    color:#000;
-    text-decoration:none;
-    font-weight:500;
-    transition:0.3s;
-    margin-bottom:20px;
-}
-
-.btn-add:hover{
-    background:#eab308;
-}
-
 /* ตาราง */
 table{
     width:100%;
     border-collapse:separate;
     border-spacing:0 15px;
-    margin-top:10px;
+    margin-top:20px;
 }
 
 th{
@@ -73,63 +56,64 @@ tr td:last-child{
     border-bottom-right-radius:15px;
 }
 
-/* ปุ่มแก้ไข */
-.btn-edit{
+/* select */
+select{
+    padding:6px 10px;
+    border-radius:20px;
+    border:1px solid #ddd;
+}
+
+/* ปุ่มบันทึก */
+button{
     padding:6px 14px;
+    border:none;
     border-radius:20px;
     background:#facc15;
     color:#000;
-    text-decoration:none;
-    margin-right:6px;
+    cursor:pointer;
     transition:0.3s;
 }
 
-.btn-edit:hover{
+button:hover{
     background:#eab308;
 }
 
 /* ปุ่มลบ */
-.btn-delete{
-    padding:6px 14px;
-    border-radius:20px;
+.btn-del{
     background:#ef4444;
     color:#fff;
-    text-decoration:none;
-    transition:0.3s;
 }
 
-.btn-delete:hover{
+.btn-del:hover{
     background:#dc2626;
 }
 
-/* แจ้งเตือน */
-.alert{
+/* ข้อความแจ้งเตือน */
+.msg-success{
+    background:#14532d;
     padding:12px;
     border-radius:12px;
     margin-bottom:15px;
 }
 
-.success{
-    background:#14532d;
-}
-
-.error{
+.msg-error{
     background:#7f1d1d;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:15px;
 }
 
 /* ปุ่มกลับ */
-a[href="dashboard.php"]{
-    display:inline-block;
-    margin-top:20px;
+a{
+    text-decoration:none;
     padding:8px 20px;
     border-radius:25px;
     border:2px solid #facc15;
     color:#facc15;
-    text-decoration:none;
     transition:0.3s;
 }
 
-a[href="dashboard.php"]:hover{
+a:hover{
     background:#facc15;
     color:#000;
 }

@@ -14,31 +14,45 @@ body{
     padding:40px;
 }
 
-/* กล่องหลัก */
 .container{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
 }
 
-/* หัวข้อ */
-h2{
-    margin-bottom:20px;
+h2, h3{
+    margin-bottom:15px;
 }
 
-/* ปุ่มเพิ่มสถานที่ */
-.btn-add{
-    display:inline-block;
-    padding:8px 20px;
-    border-radius:25px;
+/* ฟอร์ม */
+.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+input, textarea{
+    padding:10px;
+    border-radius:12px;
+    border:none;
+}
+
+textarea{
+    min-height:100px;
+    resize:none;
+}
+
+button{
+    padding:10px;
+    border-radius:20px;
+    border:none;
     background:#facc15;
     color:#000;
-    text-decoration:none;
-    font-weight:500;
+    cursor:pointer;
     transition:0.3s;
-    margin-bottom:20px;
 }
 
-.btn-add:hover{
+button:hover{
     background:#eab308;
 }
 
@@ -47,18 +61,16 @@ table{
     width:100%;
     border-collapse:separate;
     border-spacing:0 15px;
-    margin-top:10px;
 }
 
 th{
     text-align:left;
     padding:10px;
-    font-size:14px;
     color:#facc15;
 }
 
 td{
-    padding:18px 12px;
+    padding:15px;
     background:#f9fafb;
     color:#111827;
 }
@@ -73,39 +85,10 @@ tr td:last-child{
     border-bottom-right-radius:15px;
 }
 
-/* ปุ่มแก้ไข */
-.btn-edit{
-    padding:6px 14px;
-    border-radius:20px;
-    background:#facc15;
-    color:#000;
-    text-decoration:none;
-    margin-right:6px;
-    transition:0.3s;
-}
-
-.btn-edit:hover{
-    background:#eab308;
-}
-
-/* ปุ่มลบ */
-.btn-delete{
-    padding:6px 14px;
-    border-radius:20px;
-    background:#ef4444;
-    color:#fff;
-    text-decoration:none;
-    transition:0.3s;
-}
-
-.btn-delete:hover{
-    background:#dc2626;
-}
-
 /* แจ้งเตือน */
 .alert{
-    padding:12px;
-    border-radius:12px;
+    padding:10px;
+    border-radius:10px;
     margin-bottom:15px;
 }
 
@@ -118,18 +101,16 @@ tr td:last-child{
 }
 
 /* ปุ่มกลับ */
-a[href="dashboard.php"]{
-    display:inline-block;
-    margin-top:20px;
+a{
+    text-decoration:none;
     padding:8px 20px;
     border-radius:25px;
     border:2px solid #facc15;
     color:#facc15;
-    text-decoration:none;
     transition:0.3s;
 }
 
-a[href="dashboard.php"]:hover{
+a:hover{
     background:#facc15;
     color:#000;
 }
