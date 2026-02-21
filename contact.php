@@ -1,67 +1,60 @@
 <?php
 session_start();
 require 'db.php';
+
+$success = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $message = trim($_POST['message']);
+
+    $stmt = $pdo->prepare("INSERT INTO contacts (name,email,message) VALUES (?,?,?)");
+    $stmt->execute([$name,$email,$message]);
+
+    $success = "ส่งข้อความเรียบร้อยแล้ว";
+}
 ?>
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ติดต่อเรา - VillageBook</title>
-    <link rel="stylesheet" href="contact.css?v=<?php echo time(); ?>">
+<meta charset="UTF-8">
+<title>ติดต่อเรา - VillageBook</title>
+<link rel="stylesheet" href="contact.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
-<!-- ===== Navbar ===== -->
-<nav>
-    <a href="index.php" class="logo">VillageBook</a>
-    
-</nav>
+<!-- ✅ แก้ตรงนี้ -->
+<a href="index.php" class="home-float">🏠</a>
 
-<!-- ===== Contact Container ===== -->
 <div class="contact-container">
 
-  <div class="contact-header">
-    <div>
-      <h2>📞 ติดต่อเรา</h2>
-      <p>สอบถามข้อมูลหรือแจ้งปัญหาการใช้งาน</p>
-    </div>
-    <a href="index.php" class="back-btn">← กลับ</a>
-  </div>
+<h2>📞 ติดต่อเรา</h2>
 
-  <div class="contact-info">
-    <div class="info-card">
-      <h4>ที่อยู่</h4>
-      <p>หมู่บ้าน XYZ</p>
-    </div>
-    <div class="info-card">
-      <h4>เบอร์โทร</h4>
-      <p>099-999-9999</p>
-    </div>
-    <div class="info-card">
-      <h4>อีเมล</h4>
-      <p>admin@village.com</p>
-    </div>
-  </div>
+<?php if($success): ?>
+    <p style="color:green;"><?= $success ?></p>
+<?php endif; ?>
 
-  <form class="contact-form">
+<form method="POST" class="contact-form">
+
     <div>
-      <label>ชื่อ</label>
-      <input type="text">
+        <label>ชื่อ</label>
+        <input type="text" name="name" required>
     </div>
 
     <div>
-      <label>อีเมล</label>
-      <input type="email">
+        <label>อีเมล</label>
+        <input type="email" name="email" required>
     </div>
 
     <div class="full">
-      <label>ข้อความ</label>
-      <textarea></textarea>
+        <label>ข้อความ</label>
+        <textarea name="message" required></textarea>
     </div>
 
     <button type="submit" class="btn-send">📨 ส่งข้อความ</button>
-  </form>
+</form>
 
 </div>
 

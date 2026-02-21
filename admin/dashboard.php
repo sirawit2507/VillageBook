@@ -64,7 +64,7 @@ require 'auth_admin.php';
 <div class="card">
     <div style="font-size:40px;">📩</div>
     <h3>ติดต่อเรา</h3>
-    <a href="contact.php" class="btn">ดูข้อความติดต่อ</a>
+    <a href="admin_contact.php" class="btn">ดูข้อความติดต่อ</a>
 </div>
     </div>
 </div>

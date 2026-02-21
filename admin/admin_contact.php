@@ -1,63 +1,90 @@
 <?php
 session_start();
-require '../db.php';
+require __DIR__ . '/../db.php';
 
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php");
-    exit();
+/* ===== ลบข้อความ ===== */
+if(isset($_GET['delete'])){
+    $id = (int)$_GET['delete'];
+    $stmt = $pdo->prepare("DELETE FROM contacts WHERE id=?");
+    $stmt->execute([$id]);
+    header("Location: admin_contact.php");
+    exit;
 }
 
-/* ===== นับจำนวนข้อมูล ===== */
-
-// จำนวนผู้ใช้
-$stmt = $pdo->query("SELECT COUNT(*) FROM users");
-$total_users = $stmt->fetchColumn();
-
-// จำนวนสถานที่
-$stmt = $pdo->query("SELECT COUNT(*) FROM places");
-$total_places = $stmt->fetchColumn();
-
-// จำนวนข้อความติดต่อ
-$stmt = $pdo->query("SELECT COUNT(*) FROM contacts");
-$total_contacts = $stmt->fetchColumn();
+/* ===== ดึงข้อมูล ===== */
+$stmt = $pdo->query("SELECT * FROM contacts ORDER BY created_at DESC");
+$contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$total = count($contacts);
 ?>
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Admin Dashboard</title>
-<link rel="stylesheet" href="admin-dark.css">
+<title>จัดการข้อความติดต่อ</title>
+<link rel="stylesheet" href="admin_contact.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
 <div class="container">
 
-<h2>📊 แดชบอร์ดผู้ดูแลระบบ</h2>
+    <!-- ✅ ปุ่มกลับ -->
+    <a href="dashboard.php" class="back-btn">⬅ กลับหน้าแอดมิน</a>
 
-<div class="cards">
+    <h2 class="title">📩 ข้อความติดต่อ (<?= $total ?>)</h2>
 
-    <a href="manage_users.php" class="card">
-        <h3>👥 ผู้ใช้งาน</h3>
-        <p><?= $total_users ?></p>
-    </a>
+    <div class="cards">
+    <?php if(!empty($contacts)): ?>
+        <?php foreach($contacts as $c): ?>
+            <div class="card">
 
-    <a href="manage_places.php" class="card">
-        <h3>📍 สถานที่</h3>
-        <p><?= $total_places ?></p>
-    </a>
+                <h3><?= htmlspecialchars($c['name']) ?></h3>
+                <p class="email"><?= htmlspecialchars($c['email']) ?></p>
 
-    <a href="contact.php" class="card">
-        <h3>📩 ข้อความติดต่อ</h3>
-        <p><?= $total_contacts ?></p>
-    </a>
+                <p class="message">
+                    <?= substr(htmlspecialchars($c['message']),0,80) ?>...
+                </p>
+
+                <div class="date"><?= $c['created_at'] ?></div>
+
+                <div class="actions">
+                    <a href="?view=<?= $c['id'] ?>" class="btn view">👁 ดู</a>
+                    <a href="?delete=<?= $c['id'] ?>"
+                       onclick="return confirm('ลบข้อความนี้หรือไม่?')"
+                       class="btn delete">❌ ลบ</a>
+                </div>
+
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p class="no-data">ยังไม่มีข้อความ</p>
+    <?php endif; ?>
+    </div>
 
 </div>
 
-<br>
-<a href="../logout.php">🚪 ออกจากระบบ</a>
+<?php
+/* ===== Modal ดูรายละเอียด ===== */
+if(isset($_GET['view'])){
+    $id = (int)$_GET['view'];
+    $stmt = $pdo->prepare("SELECT * FROM contacts WHERE id=?");
+    $stmt->execute([$id]);
+    $detail = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if($detail):
+?>
+<div class="modal">
+    <div class="modal-box">
+        <h3><?= htmlspecialchars($detail['name']) ?></h3>
+        <p><strong>Email:</strong> <?= htmlspecialchars($detail['email']) ?></p>
+        <p><?= nl2br(htmlspecialchars($detail['message'])) ?></p>
+        <div class="date"><?= $detail['created_at'] ?></div>
+        <a href="admin_contact.php" class="close-btn">ปิด</a>
+    </div>
 </div>
+<?php
+    endif;
+}
+?>
 
 </body>
 </html>

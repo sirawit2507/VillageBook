@@ -181,3 +181,21 @@ nav{
         margin-top:15px;
     }
 }
+.home-float{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:#111827;
+    color:white;
+    padding:12px 14px;
+    border-radius:50%;
+    text-decoration:none;
+    font-size:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+.home-float:hover{
+    background:#2563eb;
+    transform:scale(1.1);
+}
