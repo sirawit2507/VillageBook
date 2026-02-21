@@ -8,82 +8,58 @@ require 'auth_admin.php';
 <head>
 <meta charset="UTF-8">
 <title>Admin Dashboard</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    margin: 0;
-}
-header {
-    background: #0f172a;
-    color: #fff;
-    padding: 15px 30px;
-}
-.container {
-    padding: 30px;
-}
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-.card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,.1);
-}
-.card a {
-    display: block;
-    padding: 12px;
-    background: #2563eb;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-.card a:hover {
-    background: #1d4ed8;
-}
-.logout {
-    float: right;
-    color: #fff;
-    text-decoration: none;
-}
-</style>
+
+<!-- เรียกใช้ไฟล์ CSS แยก -->
+<link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body>
 
-<header>
-    <h2>Admin Dashboard</h2>
-    <a class="logout" href="../logout.php">🚪 ออกจากระบบ</a>
-</header>
+<!-- แถบบน -->
+<div class="topbar">
+    <div class="topbar-content">
+        <h1>Admin Dashboard</h1>
+        <a href="../logout.php" class="logout-btn">🚪 ออกจากระบบ</a>
+    </div>
+</div>
 
+<!-- เนื้อหา -->
 <div class="container">
-    <h3>เมนูจัดการระบบ</h3>
 
-    <div class="grid">
+    <h2 class="section-title">เมนูจัดการระบบ</h2>
+
+    <div class="card-grid">
 
         <div class="card">
-            <h4>📋 การจอง</h4>
-            <a href="admin_bookings.php">ดูรายการจองทั้งหมด</a>
+            <div class="card-icon">📋</div>
+            <h3>การจอง</h3>
+            <a href="admin_bookings.php" class="card-btn">
+                ดูรายการจองทั้งหมด
+            </a>
         </div>
 
         <div class="card">
-            <h4>🏠 สถานที่</h4>
-            <a href="manage_places.php">เพิ่ม/แก้ไขสถานที่</a>
+            <div class="card-icon">🏠</div>
+            <h3>สถานที่</h3>
+            <a href="manage_places.php" class="card-btn">
+                เพิ่ม/แก้ไขสถานที่
+            </a>
         </div>
 
         <div class="card">
-            <h4>👥 ผู้ใช้งาน</h4>
-            <a href="manage_users.php">ตรวจสอบผู้ใช้งาน</a>
-        
+            <div class="card-icon">👥</div>
+            <h3>ผู้ใช้งาน</h3>
+            <a href="manage_users.php" class="card-btn">
+                ตรวจสอบผู้ใช้งาน
+            </a>
         </div>
 
         <div class="card">
-            <h4>📊 รายงาน</h4>
-            <a href="reports.php">ดูรายงานสรุป</a>
+            <div class="card-icon">📊</div>
+            <h3>รายงาน</h3>
+            <a href="reports.php" class="card-btn">
+                ดูรายงานสรุป
+            </a>
         </div>
 
     </div>

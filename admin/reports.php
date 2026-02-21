@@ -8,7 +8,8 @@ $totalUsers    = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalPlaces   = $pdo->query("SELECT COUNT(*) FROM places")->fetchColumn();
 
 // ดึงรายการจองล่าสุด
-$sql = "SELECT b.id, b.booking_date, b.start_time, b.end_time, b.status,
+$sql = "SELECT b.id, b.booking_date, b.start_time, b.end_time, 
+               b.status, b.note,
                u.username,
                p.place_name
         FROM bookings b
@@ -71,6 +72,7 @@ th{background:#f3f4f6;}
             <th>วันที่</th>
             <th>เวลา</th>
             <th>สถานะ</th>
+            <th>เพิ่มเติม</th>
         </tr>
 
         <?php foreach ($bookings as $b): ?>
@@ -80,6 +82,7 @@ th{background:#f3f4f6;}
                 <td><?= htmlspecialchars($b['place_name']) ?></td>
                 <td><?= htmlspecialchars($b['booking_date']) ?></td>
                 <td><?= htmlspecialchars($b['start_time']) ?> - <?= htmlspecialchars($b['end_time']) ?></td>
+                <td><?= htmlspecialchars($b['note'] ?: '-') ?></td>
                 <td>
                     <?php
                         $status = $b['status'] ?? 'pending';

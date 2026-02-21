@@ -1,37 +1,23 @@
 <?php
-require_once __DIR__ . "/../db.php";
-require_once __DIR__ . "/auth_admin.php";
+session_start();
+require '../db.php';
 
-$success = "";
-$error = "";
+$success = '';
+$error = '';
+$places = [];
 
-// เพิ่มสถานที่
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_place'])) {
-    $place_name = trim($_POST['place_name'] ?? '');
-
-    if ($place_name === '') {
-        $error = "กรุณากรอกชื่อสถานที่";
-    } else {
-        $stmt = $pdo->prepare("INSERT INTO places (place_name) VALUES (?)");
-        $stmt->execute([$place_name]);
-        $success = "เพิ่มสถานที่สำเร็จ!";
-    }
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login.php");
+    exit();
 }
 
-// ลบสถานที่
-if (isset($_GET['delete_id'])) {
-    $delete_id = (int)$_GET['delete_id'];
-
-    if ($delete_id > 0) {
-        $stmt = $pdo->prepare("DELETE FROM places WHERE id = ?");
-        $stmt->execute([$delete_id]);
-        header("Location: manage_places.php");
-        exit;
-    }
+// ดึงข้อมูลสถานที่ทั้งหมด
+try {
+    $stmt = $pdo->query("SELECT * FROM places ORDER BY id DESC");
+    $places = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $error = "เกิดข้อผิดพลาดในการดึงข้อมูล";
 }
-
-// ดึงรายการสถานที่ทั้งหมด
-$places = $pdo->query("SELECT * FROM places ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -39,63 +25,58 @@ $places = $pdo->query("SELECT * FROM places ORDER BY id DESC")->fetchAll(PDO::FE
 <head>
 <meta charset="UTF-8">
 <title>จัดการสถานที่</title>
-<style>
-body { font-family: Arial; background:#f4f6f8; margin:0; padding:20px; }
-.box { max-width:700px; margin:auto; background:#fff; padding:20px; border-radius:12px; }
-input, button { padding:10px; }
-table { width:100%; border-collapse: collapse; margin-top:15px; }
-th, td { border-bottom:1px solid #ddd; padding:10px; text-align:left; }
-a.btn { padding:6px 10px; border-radius:6px; text-decoration:none; color:#fff; }
-.edit { background:#2563eb; }
-.del { background:#dc2626; }
-</style>
+<link rel="stylesheet" href="manage_places.css">
 </head>
 <body>
 
-<div class="box">
-    <h2>🏠 จัดการสถานที่</h2>
+<div class="container">
 
-    <?php if ($success): ?>
-        <p style="color:green;"><?= htmlspecialchars($success) ?></p>
-    <?php endif; ?>
+<h2>📍 จัดการสถานที่</h2>
 
-    <?php if ($error): ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
-    <?php endif; ?>
+<?php if ($success): ?>
+    <div class="alert success"><?= $success ?></div>
+<?php endif; ?>
 
-    <form method="post">
-        <input type="text" name="place_name" required placeholder="เช่น สระว่ายน้ำ">
-        <button type="submit" name="add_place">เพิ่มสถานที่</button>
-    </form>
+<?php if ($error): ?>
+    <div class="alert error"><?= $error ?></div>
+<?php endif; ?>
 
-    <hr>
+<a href="add_place.php" class="btn-add">+ เพิ่มสถานที่</a>
 
-    <h3>รายการสถานที่</h3>
-
-    <table>
+<table>
+    <thead>
         <tr>
             <th>ID</th>
             <th>ชื่อสถานที่</th>
-            <th>จัดการ</th>
+            <th>รายละเอียด</th>
+            <th>การจัดการ</th>
         </tr>
+    </thead>
+    <tbody>
 
-        <?php foreach ($places as $p): ?>
-            <tr>
-                <td><?= (int)$p['id'] ?></td>
-                <td><?= htmlspecialchars($p['place_name']) ?></td>
-                <td>
-                    <a class="btn edit" href="place_edit.php?id=<?= (int)$p['id'] ?>">แก้ไข</a>
-                    <a class="btn del"
-                       href="manage_places.php?delete_id=<?= (int)$p['id'] ?>"
-                       onclick="return confirm('คุณต้องการลบสถานที่นี้ใช่ไหม?');">
-                       ลบ
-                    </a>
-                </td>
-            </tr>
+    <?php if (count($places) > 0): ?>
+        <?php foreach ($places as $place): ?>
+        <tr>
+            <td><?= $place['id'] ?></td>
+            <td><?= htmlspecialchars($place['place_name']) ?></td>
+            <td><?= htmlspecialchars($place['description']) ?></td>
+            <td>
+                <a href="edit_place.php?id=<?= $place['id'] ?>" class="btn-edit">แก้ไข</a>
+                <a href="delete_place.php?id=<?= $place['id'] ?>" 
+                   class="btn-delete"
+                   onclick="return confirm('คุณแน่ใจหรือไม่?')">ลบ</a>
+            </td>
+        </tr>
         <?php endforeach; ?>
-    </table>
+    <?php else: ?>
+        <tr>
+            <td colspan="4" style="text-align:center;">ไม่มีข้อมูลสถานที่</td>
+        </tr>
+    <?php endif; ?>
 
-    <br>
+    </tbody>
+</table>
+         <br>
     <a href="dashboard.php">⬅ กลับหน้าแอดมิน</a>
 </div>
 

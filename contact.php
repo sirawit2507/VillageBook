@@ -8,23 +8,17 @@ require 'db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ติดต่อเรา - VillageBook</title>
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="contact.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
+<!-- ===== Navbar ===== -->
 <nav>
     <a href="index.php" class="logo">VillageBook</a>
-    <div class="nav-links">
-        <a href="index.php">หน้าแรก</a>
-        <a href="contact.php" style="color: var(--primary);">ติดต่อเรา</a>
-        <?php if(isset($_SESSION['user_id'])): ?>
-            <a href="logout.php" style="color: #e63757;">ออกจากระบบ</a>
-        <?php else: ?>
-            <a href="login.php">เข้าสู่ระบบ</a>
-        <?php endif; ?>
-    </div>
+    
 </nav>
 
+<!-- ===== Contact Container ===== -->
 <div class="contact-container">
 
   <div class="contact-header">
@@ -66,12 +60,10 @@ require 'db.php';
       <textarea></textarea>
     </div>
 
-    <button class="btn-send">📨 ส่งข้อความ</button>
+    <button type="submit" class="btn-send">📨 ส่งข้อความ</button>
   </form>
 
 </div>
-
-
 
 </body>
 </html>

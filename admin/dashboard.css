@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Kanit',sans-serif;
+}
+
+/* พื้นหลังไล่สี */
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#3f3f46,#1f2937);
+    color:#fff;
+}
+
+/* ===== Topbar ===== */
+.topbar{
+    background:#0f172a;
+    padding:20px 40px;
+}
+
+.topbar-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.topbar h1{
+    font-size:28px;
+    font-weight:600;
+}
+
+/* ปุ่มออกจากระบบ */
+.logout-btn{
+    text-decoration:none;
+    padding:10px 22px;
+    border-radius:30px;
+    border:2px solid #facc15;
+    color:#facc15;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.logout-btn:hover{
+    background:#facc15;
+    color:#000;
+}
+
+/* ===== Container ===== */
+.container{
+    padding:50px 40px;
+}
+
+/* หัวข้อ */
+.section-title{
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+/* ===== Grid Card ===== */
+.card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+/* กล่องการ์ด */
+.card{
+    background:#e5e7eb;
+    border-radius:25px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+    color:#111827;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+/* ไอคอน */
+.card-icon{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+/* หัวข้อการ์ด */
+.card h3{
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+/* ปุ่มใน card */
+.card-btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:#2563eb;
+    color:#fff;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.card-btn:hover{
+    background:#1d4ed8;
+}
